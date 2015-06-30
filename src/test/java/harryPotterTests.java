@@ -21,7 +21,8 @@ public class harryPotterTests {
         double expectedPrice = EACH_BOOK_PRICE * 2;
         assertEquals(expectedPrice, harryPotter.calculateBestPrice(1, 1), DELTA);
     }
-//
+
+
 //    @Test
 //    public void whenFirstBookCopiesAreThreeAndRestAreNone()
 //    {

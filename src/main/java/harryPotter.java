@@ -1,12 +1,14 @@
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class harryPotter {
 
     public static final int EACH_BOOK_PRICE = 8;
+    public static double finalDiscountedPrice = 0.000;
 
     public static double calculateBestPrice(Integer... books){
 
-        HashMap<Integer, Integer> myMap = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> myMap = new LinkedHashMap<Integer, Integer>();
 
         for (Integer book : books)
         {
@@ -20,14 +22,19 @@ public class harryPotter {
         System.out.print("Values in the Map are : " + myMap.values() + "\n");
         System.out.println("Size of the Map is : " + myMap.size());
 
-        Integer myBookCopies = myMap.get(books[0]);
-        System.out.println(myBookCopies);
+        for (Map.Entry<Integer, Integer> entry : myMap.entrySet())
+        {
+            Integer myBookCopies = entry.getValue();
 
-        if (myBookCopies > 1)
-            return EACH_BOOK_PRICE * myBookCopies;
+            if (myBookCopies > 1)
+                finalDiscountedPrice = EACH_BOOK_PRICE * myBookCopies;
 
-        else
-            return EACH_BOOK_PRICE;
+            else
+                finalDiscountedPrice = EACH_BOOK_PRICE;
+
+        }
+
+        return finalDiscountedPrice;
 
     }
 }
