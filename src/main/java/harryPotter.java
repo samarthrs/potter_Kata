@@ -29,14 +29,10 @@ public class harryPotter {
         {
             myBookCopies = entry.getValue();
 
-            if (myMap.size() == 1)
-            {
-                finalDiscountedPrice = (myBookCopies > 1) ? EACH_BOOK_PRICE * myBookCopies : EACH_BOOK_PRICE;
-            }
-
-            if (myMap.size() == 2)
-            {
-                finalDiscountedPrice = DISCOUNTED_PRICE_FOR_TWO_DIFFERENT_BOOKS * myMap.size();
+            switch (myMap.size()){
+                case 1 : finalDiscountedPrice = (myBookCopies > 1) ? EACH_BOOK_PRICE * myBookCopies : EACH_BOOK_PRICE; break;
+                case 2 : finalDiscountedPrice = DISCOUNTED_PRICE_FOR_TWO_DIFFERENT_BOOKS * myMap.size(); break;
+                default : break;
             }
         }
 

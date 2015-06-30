@@ -23,7 +23,6 @@ public class harryPotterTests {
         assertEquals(expectedPrice, harryPotter.calculateBestPrice(1, 1), DELTA);
     }
 
-
     @Test
     public void whenFirstBookCopiesAreThreeAndRestAreNoneThenNoDiscountIsApplied()
     {
