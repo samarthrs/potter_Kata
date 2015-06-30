@@ -23,13 +23,13 @@ public class harryPotterTests {
     }
 
 
-//    @Test
-//    public void whenFirstBookCopiesAreThreeAndRestAreNone()
-//    {
-//        double expectedPrice = EACH_BOOK_PRICE * 3;
-//        assertEquals(expectedPrice, harryPotter.calculateBestPrice(3, 0), DELTA);
-//    }
-//
+    @Test
+    public void whenFirstBookCopiesAreThreeAndRestAreNone()
+    {
+        double expectedPrice = EACH_BOOK_PRICE * 3;
+        assertEquals(expectedPrice, harryPotter.calculateBestPrice(1, 1, 1), DELTA);
+    }
+
 //    @Test
 //    public void whenFirstAndSecondBookCopiesAreOneAndRestAreNone()
 //    {
