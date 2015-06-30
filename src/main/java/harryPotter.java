@@ -1,26 +1,33 @@
+import java.util.HashMap;
+
 public class harryPotter {
 
     public static final int EACH_BOOK_PRICE = 8;
-    public static final double DISCOUNT_FOR_TWO = 0.95;
 
-    public static double calculateBestPrice (int firstBookCopies, int secondBookCopies)
-    {
-        double totalPrice = 0;
+    public static double calculateBestPrice(Integer... books){
 
-        int bookCopies[] = {firstBookCopies, secondBookCopies};
+        HashMap<Integer, Integer> myMap = new HashMap<Integer, Integer>();
 
-        if (bookCopies[0] != 0 && bookCopies[1] == 0){
-            totalPrice = EACH_BOOK_PRICE * bookCopies[0];
+        for (Integer book : books)
+        {
+            if (myMap.containsKey(book))
+                myMap.put(book, myMap.get(book)+1);
+
+            else
+                myMap.put(book, 1);
         }
 
-        else if (bookCopies[1] != 0 && bookCopies[0] == 0){
-            totalPrice = EACH_BOOK_PRICE * bookCopies[1];
-        }
+        System.out.print("Values in the Map are : " + myMap.values() + "\n");
+        System.out.println("Size of the Map is : " + myMap.size());
 
-        else{
-            totalPrice = (EACH_BOOK_PRICE * DISCOUNT_FOR_TWO * (bookCopies[0] + bookCopies[1]));
-        }
+        Integer myBookCopies = myMap.get(books[0]);
+        System.out.println(myBookCopies);
 
-        return totalPrice;
+        if (myBookCopies > 1)
+            return EACH_BOOK_PRICE * myBookCopies;
+
+        else
+            return EACH_BOOK_PRICE;
+
     }
 }
