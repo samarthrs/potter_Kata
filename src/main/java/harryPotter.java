@@ -1,4 +1,5 @@
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -11,6 +12,15 @@ public class harryPotter {
     public static final double DISCOUNTED_PRICE_FOR_FIVE_DIFFERENT_BOOKS = 6.00;
     private static double finalDiscountedPrice = 0.000;
     private static Integer myBookCopies = 0;
+
+    private static Map<Integer,Double> mapMyPricesForDiscounts = new HashMap<>();
+    static{
+        mapMyPricesForDiscounts.put(1, 8.00);
+        mapMyPricesForDiscounts.put(2, 7.60);
+        mapMyPricesForDiscounts.put(3, 7.20);
+        mapMyPricesForDiscounts.put(4, 6.40);
+        mapMyPricesForDiscounts.put(5, 6.00);
+    }
 
     public static double calculateBestPrice(Integer... books){
 
@@ -39,23 +49,8 @@ public class harryPotter {
     {
         myBookCopies = Collections.min(nSizeMap.values());
 
-        switch(nSizeMap.size()){
-            case 1 : return (myBookCopies > 1) ? EACH_BOOK_PRICE * myBookCopies : EACH_BOOK_PRICE;
-
-            case 2 : return (myBookCopies > 1) ? DISCOUNTED_PRICE_FOR_TWO_DIFFERENT_BOOKS * myBookCopies * nSizeMap.size():
-                                                 DISCOUNTED_PRICE_FOR_TWO_DIFFERENT_BOOKS * nSizeMap.size();
-
-            case 3 : return (myBookCopies > 1) ? DISCOUNTED_PRICE_FOR_THREE_DIFFERENT_BOOKS * myBookCopies * nSizeMap.size():
-                                                 DISCOUNTED_PRICE_FOR_THREE_DIFFERENT_BOOKS * nSizeMap.size();
-
-            case 4 : return (myBookCopies > 1) ? DISCOUNTED_PRICE_FOR_FOUR_DIFFERENT_BOOKS * myBookCopies * nSizeMap.size():
-                                                 DISCOUNTED_PRICE_FOR_FOUR_DIFFERENT_BOOKS * nSizeMap.size();
-
-            case 5 : return (myBookCopies > 1) ? DISCOUNTED_PRICE_FOR_FIVE_DIFFERENT_BOOKS * myBookCopies * nSizeMap.size():
-                                                 DISCOUNTED_PRICE_FOR_FIVE_DIFFERENT_BOOKS * nSizeMap.size();
-
-            default : return 0;
-        }
+        return (myBookCopies > 1) ? mapMyPricesForDiscounts.get(nSizeMap.size()) * myBookCopies * nSizeMap.size():
+                                    mapMyPricesForDiscounts.get(nSizeMap.size()) * nSizeMap.size();
 
     }
 
