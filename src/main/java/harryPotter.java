@@ -1,11 +1,12 @@
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class harryPotter {
 
     private static double finalDiscountedPrice = 0.000;
-    private static Integer myBookCopies = 0;
+    private static Integer minValueInBookCopies = 0;
 
     private static Map<Integer,Double> mapMyPricesForDiscounts = new HashMap<>();
     static{
@@ -38,16 +39,25 @@ public class harryPotter {
 
     private static double genericPriceCalculatorBasedOnMapSize(Map<Integer, Integer> nSizeMap)
     {
-        if (nSizeMap.size() != 0) {
-            myBookCopies = Collections.min(nSizeMap.values());
+        double tempDiscountedPrice = 0.000;
 
-            return (myBookCopies > 1) ? mapMyPricesForDiscounts.get(nSizeMap.size()) * myBookCopies * nSizeMap.size() :
-                    mapMyPricesForDiscounts.get(nSizeMap.size()) * nSizeMap.size();
-        }
+        if (nSizeMap.size() != 0)
+        {
+            while (nSizeMap.size() != 0)
+            {
+                minValueInBookCopies = Collections.min(nSizeMap.values());
 
-        else {
-            return 0;
+                tempDiscountedPrice += (minValueInBookCopies > 1) ? mapMyPricesForDiscounts.get(nSizeMap.size()) * minValueInBookCopies * nSizeMap.size() :
+                        mapMyPricesForDiscounts.get(nSizeMap.size()) * nSizeMap.size();
+
+                nSizeMap = nSizeMap.entrySet().stream().filter(entry -> entry.getValue() - minValueInBookCopies > 0)
+                        .collect(Collectors.toMap(entry2 -> entry2.getKey(), entry2 -> entry2.getValue() - minValueInBookCopies));
+            }
+
+            return tempDiscountedPrice;
         }
+        else
+            return tempDiscountedPrice;
     }
 
 }
