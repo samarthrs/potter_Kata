@@ -43,21 +43,29 @@ public class harryPotter {
 
         if (nSizeMap.size() != 0)
         {
-            while (nSizeMap.size() != 0)
-            {
-                minValueInBookCopies = Collections.min(nSizeMap.values());
-
-                tempDiscountedPrice += (minValueInBookCopies > 1) ? mapMyPricesForDiscounts.get(nSizeMap.size()) * minValueInBookCopies * nSizeMap.size() :
-                        mapMyPricesForDiscounts.get(nSizeMap.size()) * nSizeMap.size();
-
-                nSizeMap = nSizeMap.entrySet().stream().filter(entry -> entry.getValue() - minValueInBookCopies > 0)
-                        .collect(Collectors.toMap(entry2 -> entry2.getKey(), entry2 -> entry2.getValue() - minValueInBookCopies));
-            }
-
+            tempDiscountedPrice = calculateDiscountedPriceForBooksPurchased(nSizeMap);
             return tempDiscountedPrice;
         }
+
         else
             return tempDiscountedPrice;
+    }
+
+    private static double calculateDiscountedPriceForBooksPurchased(Map<Integer, Integer> sizedMap)
+    {
+        double sizedDiscountedPrice = 0.000;
+
+        while (sizedMap.size() != 0) {
+            minValueInBookCopies = Collections.min(sizedMap.values());
+
+            sizedDiscountedPrice += (minValueInBookCopies > 1) ? mapMyPricesForDiscounts.get(sizedMap.size()) * minValueInBookCopies * sizedMap.size() :
+                    mapMyPricesForDiscounts.get(sizedMap.size()) * sizedMap.size();
+
+            sizedMap = sizedMap.entrySet().stream().filter(entry -> entry.getValue() - minValueInBookCopies > 0)
+                    .collect(Collectors.toMap(entry2 -> entry2.getKey(), entry2 -> entry2.getValue() - minValueInBookCopies));
+        }
+
+        return sizedDiscountedPrice;
     }
 
 }
