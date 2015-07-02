@@ -18,30 +18,7 @@ public class harryPotter {
 
         mapMyBooksWithNumberOfCopies(myMap, books);
 
-        if (myMap.size() == 1)
-        {
-            finalDiscountedPrice = whenSizeIsOne(myMap);
-        }
-
-        if (myMap.size() == 2)
-        {
-            finalDiscountedPrice = whenSizeIsTwo(myMap);
-        }
-
-        if (myMap.size() == 3)
-        {
-            finalDiscountedPrice = whenSizeIsThree(myMap);
-        }
-
-        if (myMap.size() == 4)
-        {
-            finalDiscountedPrice = whenSizeIsFour(myMap);
-        }
-
-        if (myMap.size() == 5)
-        {
-            finalDiscountedPrice = whenSizeIsFive(myMap);
-        }
+        finalDiscountedPrice = genericPriceCalculatorBasedOnMapSize(myMap);
 
         return finalDiscountedPrice;
 
@@ -58,41 +35,28 @@ public class harryPotter {
         }
     }
 
-
-    private static double whenSizeIsOne(Map<Integer, Integer> size1Map)
+    private static double genericPriceCalculatorBasedOnMapSize(Map<Integer, Integer> nSizeMap)
     {
-        myBookCopies = Collections.min(size1Map.values());
-        return (myBookCopies > 1) ? EACH_BOOK_PRICE * myBookCopies : EACH_BOOK_PRICE;
+        myBookCopies = Collections.min(nSizeMap.values());
+
+        switch(nSizeMap.size()){
+            case 1 : return (myBookCopies > 1) ? EACH_BOOK_PRICE * myBookCopies : EACH_BOOK_PRICE;
+
+            case 2 : return (myBookCopies > 1) ? DISCOUNTED_PRICE_FOR_TWO_DIFFERENT_BOOKS * myBookCopies * nSizeMap.size():
+                                                 DISCOUNTED_PRICE_FOR_TWO_DIFFERENT_BOOKS * nSizeMap.size();
+
+            case 3 : return (myBookCopies > 1) ? DISCOUNTED_PRICE_FOR_THREE_DIFFERENT_BOOKS * myBookCopies * nSizeMap.size():
+                                                 DISCOUNTED_PRICE_FOR_THREE_DIFFERENT_BOOKS * nSizeMap.size();
+
+            case 4 : return (myBookCopies > 1) ? DISCOUNTED_PRICE_FOR_FOUR_DIFFERENT_BOOKS * myBookCopies * nSizeMap.size():
+                                                 DISCOUNTED_PRICE_FOR_FOUR_DIFFERENT_BOOKS * nSizeMap.size();
+
+            case 5 : return (myBookCopies > 1) ? DISCOUNTED_PRICE_FOR_FIVE_DIFFERENT_BOOKS * myBookCopies * nSizeMap.size():
+                                                 DISCOUNTED_PRICE_FOR_FIVE_DIFFERENT_BOOKS * nSizeMap.size();
+
+            default : return 0;
+        }
+
     }
-
-    private static double whenSizeIsTwo(Map<Integer, Integer> size2Map)
-    {
-        myBookCopies = Collections.min(size2Map.values());
-        return (myBookCopies > 1) ? DISCOUNTED_PRICE_FOR_TWO_DIFFERENT_BOOKS * myBookCopies * size2Map.size():
-                                    DISCOUNTED_PRICE_FOR_TWO_DIFFERENT_BOOKS * size2Map.size();
-    }
-
-    private static double whenSizeIsThree(Map<Integer, Integer> size3Map)
-    {
-        myBookCopies = Collections.min(size3Map.values());
-        return (myBookCopies > 1) ? DISCOUNTED_PRICE_FOR_THREE_DIFFERENT_BOOKS * myBookCopies * size3Map.size():
-                DISCOUNTED_PRICE_FOR_THREE_DIFFERENT_BOOKS * size3Map.size();
-    }
-
-    private static double whenSizeIsFour(Map<Integer, Integer> size4Map)
-    {
-        myBookCopies = Collections.min(size4Map.values());
-        return (myBookCopies > 1) ? DISCOUNTED_PRICE_FOR_FOUR_DIFFERENT_BOOKS * myBookCopies * size4Map.size():
-                DISCOUNTED_PRICE_FOR_FOUR_DIFFERENT_BOOKS * size4Map.size();
-    }
-
-    private static double whenSizeIsFive(Map<Integer, Integer> size5Map)
-    {
-        myBookCopies = Collections.min(size5Map.values());
-        return (myBookCopies > 1) ? DISCOUNTED_PRICE_FOR_FIVE_DIFFERENT_BOOKS * myBookCopies * size5Map.size():
-                DISCOUNTED_PRICE_FOR_FIVE_DIFFERENT_BOOKS * size5Map.size();
-    }
-
-
 
 }
