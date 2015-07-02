@@ -4,9 +4,12 @@ import static org.junit.Assert.*;
 
 public class harryPotterTests {
 
-    public static final int EACH_BOOK_PRICE = 8;
+    private static final int EACH_BOOK_PRICE = 8;
     private static final double DISCOUNTED_PRICE_FOR_TWO_DIFFERENT_BOOKS = 7.60;
-    public static final double DELTA = 0.001;
+    private static final double DELTA = 0.001;
+    private static final double DISCOUNTED_PRICE_FOR_THREE_DIFFERENT_BOOKS = 7.20;
+    private static final double DISCOUNTED_PRICE_FOR_FOUR_DIFFERENT_BOOKS = 6.40;
+    private static final double DISCOUNTED_PRICE_FOR_FIVE_DIFFERENT_BOOKS = 6.00;
 
     @Test
     public void whenFirstBookCopyIsOneAndRestAreNoneThenNoDiscountIsApplied()
@@ -31,39 +34,71 @@ public class harryPotterTests {
     }
 
     @Test
-    public void whenFirstAndSecondBookCopiesAreOneAndRestAreNoneThenFivePercentDiscountForBoth()
+    public void whenFirstAndSecondBookCopiesIsOneAndRestAreNoneThenFivePercentDiscountIsAppliedS()
     {
         double expectedPrice = DISCOUNTED_PRICE_FOR_TWO_DIFFERENT_BOOKS * 2;
         assertEquals(expectedPrice, harryPotter.calculateBestPrice(0, 1), DELTA);
     }
 
     @Test
-    public void whenSecondAndThirdBookCopiesAreOneAndRestAreNoneThenFivePercentDiscountForBoth()
+    public void whenFirstAndSecondBookCopiesAreTwoAndRestAreNoneThenFivePercentDiscountIsApplied()
     {
-        double expectedPrice = DISCOUNTED_PRICE_FOR_TWO_DIFFERENT_BOOKS * 2;
-        assertEquals(expectedPrice, harryPotter.calculateBestPrice(1, 2), DELTA);
+        double expectedPrice = DISCOUNTED_PRICE_FOR_TWO_DIFFERENT_BOOKS * 2 * 2;
+        assertEquals(expectedPrice, harryPotter.calculateBestPrice(0, 1, 0, 1), DELTA);
     }
 
     @Test
-    public void whenThirdAndFourthBookCopiesAreOneAndRestAreNoneThenFivePercentDiscountForBoth()
+    public void whenFourthAndFifthBookCopiesAreThreeAndRestAreNoneThenFivePercentDiscountIsApplied()
     {
-        double expectedPrice = DISCOUNTED_PRICE_FOR_TWO_DIFFERENT_BOOKS * 2;
-        assertEquals(expectedPrice, harryPotter.calculateBestPrice(2, 3), DELTA);
+        double expectedPrice = DISCOUNTED_PRICE_FOR_TWO_DIFFERENT_BOOKS * 3 * 2;
+        assertEquals(expectedPrice, harryPotter.calculateBestPrice(3, 4, 3, 3, 4, 4), DELTA);
     }
 
     @Test
-    public void whenFourthAndFifthBookCopiesAreOneAndRestAreNoneThenFivePercentDiscountForBoth()
+    public void whenFirstSecondThirdBooksAreOneAndRestAreNoneThenTenPercentDiscountIsApplied()
     {
-        double expectedPrice = DISCOUNTED_PRICE_FOR_TWO_DIFFERENT_BOOKS * 2;
-        assertEquals(expectedPrice, harryPotter.calculateBestPrice(3, 4), DELTA);
+        double expectedPrice = DISCOUNTED_PRICE_FOR_THREE_DIFFERENT_BOOKS * 3;
+        assertEquals(expectedPrice, harryPotter.calculateBestPrice(0, 1, 2), DELTA);
     }
 
     @Test
-    public void whenFifthAndFirstBookCopiesAreOneAndRestAreNoneThenFivePercentDiscountForBoth()
+    public void whenFourthAndFifthAndSecondBooksAreTwoAndRestAreNoneThenTenPercentDiscountIsApplied()
     {
-        double expectedPrice = DISCOUNTED_PRICE_FOR_TWO_DIFFERENT_BOOKS * 2;
-        assertEquals(expectedPrice, harryPotter.calculateBestPrice(4, 1), DELTA);
+        double expectedPrice = DISCOUNTED_PRICE_FOR_THREE_DIFFERENT_BOOKS * 3 * 3;
+        assertEquals(expectedPrice, harryPotter.calculateBestPrice(1, 2, 3, 1, 3, 2, 3, 2, 1), DELTA);
     }
+
+    @Test
+    public void whenFirstSecondThirdFourthBooksAreOneAndRestAreNoneThenTwentyPercentDiscountIsApplied()
+    {
+        double expectedPrice = DISCOUNTED_PRICE_FOR_FOUR_DIFFERENT_BOOKS * 4;
+        assertEquals(expectedPrice, harryPotter.calculateBestPrice(0, 1, 2, 3), DELTA);
+    }
+
+    @Test
+    public void whenFirstSecondThirdFourthBooksAreTwoAndRestAreNoneThenTwentyPercentDiscountIsApplied()
+    {
+        double expectedPrice = DISCOUNTED_PRICE_FOR_FOUR_DIFFERENT_BOOKS * 4 * 2;
+        assertEquals(expectedPrice, harryPotter.calculateBestPrice(0, 0, 1, 1, 2, 2, 3, 3), DELTA);
+    }
+
+    @Test
+    public void whenAllFiveBooksArePurchasedThenTwentyFivePercentDiscountIsApplied()
+    {
+        double expectedPrice = DISCOUNTED_PRICE_FOR_FIVE_DIFFERENT_BOOKS * 5;
+        assertEquals(expectedPrice, harryPotter.calculateBestPrice(0, 1, 2, 3, 4), DELTA);
+    }
+
+    @Test
+    public void whenAllFiveBooksArePurchasedThriceThenTwentyFivePercentDiscountIsApplied()
+    {
+        double expectedPrice = DISCOUNTED_PRICE_FOR_FIVE_DIFFERENT_BOOKS * 5 * 3;
+        assertEquals(expectedPrice, harryPotter.calculateBestPrice(0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 0, 1, 2, 3, 4), DELTA);
+    }
+
+    
+
+
 
 
 
