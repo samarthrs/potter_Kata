@@ -127,6 +127,15 @@ public class harryPotterTests {
         assertEquals(expectedPrice, harryPotter.calculateBestPrice(1, 2, 3, 4, 3, 2, 1, 2, 1, 1), DELTA);
     }
 
+//    @Test
+//    public void lastCase() {
+//        double expectedPrice = DISCOUNTED_PRICE_FOR_FIVE_DIFFERENT_BOOKS * 5 * 4
+//                + DISCOUNTED_PRICE_FOR_THREE_DIFFERENT_BOOKS * 3;
+//
+//        double expectedPrice = 141.2;
+//        assertEquals(expectedPrice, harryPotter.calculateBestPrice(0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4), DELTA);
+//    }
+
 
 
     }
